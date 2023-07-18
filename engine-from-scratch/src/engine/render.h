@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../../../../include/SDL2/SDL.h"
-#include "../../../../include/linmath.h"
+#include "../../../include/SDL2/SDL.h"
+#include "../../../include/linmath.h"
 
-#include "../types.h"
+#include "types.h"
 
 typedef struct render_state {
   SDL_Window *window;
