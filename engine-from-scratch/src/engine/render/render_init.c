@@ -5,7 +5,7 @@
 #include "../global.h"
 
 #include "../render.h"
-#include "../render_internal.h"
+#include "render_internal.h"
 
 SDL_Window *render_init_window(u32 width, u32 height) {
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
