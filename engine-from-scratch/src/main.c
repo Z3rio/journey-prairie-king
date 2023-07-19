@@ -13,34 +13,33 @@
 #include "engine/util.h"
 
 static bool should_quit = false;
-static vec2 pos;
 
 static void input_handle(Body *body_player) {
   f32 velx = 0;
-  f32 vely = body_player->velocity[1];
+	f32 vely = body_player->velocity[1];
 
-  if (global.input.escape) {
-    should_quit = true;
-  }
+	if (global.input.escape > 0) {
+		should_quit = true;
+	}
 
-  if (global.input.right > 0) {
-    velx += 1000;
-  }
+	if (global.input.right > 0) {
+		velx += 1000;
+	}
 
-  if (global.input.left > 0) {
-    velx -= 1000;
-  }
+	if (global.input.left > 0) {
+		velx -= 1000;
+	}
 
-  if (global.input.up > 0) {
-    vely = 4000;
-  }
+	if (global.input.up > 0) {
+		vely = 4000;
+	}
 
-  if (global.input.down < 0) {
-    vely -= 800;
-  }
+	if (global.input.down < 0) {
+		vely -= 800;
+	}
 
-  body_player->velocity[0] = velx;
-  body_player->velocity[1] = vely;
+	body_player->velocity[0] = velx;
+	body_player->velocity[1] = vely;
 }
 
 int main(int argc, char *argv[]) {
@@ -49,27 +48,23 @@ int main(int argc, char *argv[]) {
   render_init();
   physics_init();
 
-  pos[0] = global.render.width * 0.5;
-  pos[1] = global.render.height * 0.5;
-
   SDL_ShowCursor(false);
   
+  u32 body_id = physics_body_create((vec2){100, 800}, (vec2){50, 50});
+
+  f32 width = global.render.width;
+  f32 height = global.render.height;
+
+  u32 static_body_a_id = physics_static_body_create((vec2){width * 0.5 - 25, height - 25}, (vec2){width - 50, 50});
+  u32 static_body_b_id = physics_static_body_create((vec2){width - 25, height * 0.5 + 25}, (vec2){50, height - 50});
+	u32 static_body_c_id = physics_static_body_create((vec2){width * 0.5 + 25, 25}, (vec2){width - 50, 50});
+	u32 static_body_d_id = physics_static_body_create((vec2){25, height * 0.5 - 25}, (vec2){50, height - 50});
+	u32 static_body_e_id = physics_static_body_create((vec2){width * 0.5, height * 0.5}, (vec2){150, 150});
+
   while (!should_quit) {
     time_update();
 
     SDL_Event event;
-
-    u32 body_id = physics_body_create((vec2){100, 800}, (vec2){50, 50});
-
-    f32 width = global.render.width;
-    f32 height = global.render.height;
-
-	  u32 static_body_a_id = physics_static_body_create((vec2){width * 0.5 - 25, height - 25}, (vec2){width - 50, 50});
-	  u32 static_body_b_id = physics_static_body_create((vec2){width - 25, height * 0.5 + 25}, (vec2){50, height - 50});
-	  u32 static_body_c_id = physics_static_body_create((vec2){width * 0.5 + 25, 25}, (vec2){width - 50, 50});
-	  u32 static_body_d_id = physics_static_body_create((vec2){25, height * 0.5 - 25}, (vec2){50, height - 50});
-	  u32 static_body_e_id = physics_static_body_create((vec2){width * 0.5, height * 0.5}, (vec2){150, 150});
-
 
     while (SDL_PollEvent(&event)) {
       switch (event.type) {
