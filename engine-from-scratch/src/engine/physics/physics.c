@@ -191,14 +191,6 @@ void physics_update(void) {
   for (u32 i = 0; i < state.body_list->len; ++i) {
     body = array_list_get(state.body_list, i);
 
-    body->velocity[1] += state.gravity;
-    if (state.terminal_velocity > body->velocity[1]) {
-      body->velocity[1] = state.terminal_velocity;
-    }
-
-    body->velocity[0] += body->acceleration[0];
-    body->velocity[1] += body->acceleration[1];
-
     vec2 scaled_velocity;
     vec2_scale(scaled_velocity, body->velocity, global.time.delta * tick_rate);
 

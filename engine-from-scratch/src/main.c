@@ -16,26 +16,26 @@ static bool should_quit = false;
 
 static void input_handle(Body *body_player) {
   f32 velx = 0;
-	f32 vely = body_player->velocity[1];
+	f32 vely = 0;
 
 	if (global.input.escape > 0) {
 		should_quit = true;
 	}
 
 	if (global.input.right > 0) {
-		velx += 1000;
+		velx = 800;
 	}
 
 	if (global.input.left > 0) {
-		velx -= 1000;
+		velx = -800;
 	}
 
 	if (global.input.up > 0) {
-		vely = 4000;
+		vely = 800;
 	}
 
-	if (global.input.down < 0) {
-		vely -= 800;
+	if (global.input.down > 0) {
+		vely = -800;
 	}
 
 	body_player->velocity[0] = velx;
