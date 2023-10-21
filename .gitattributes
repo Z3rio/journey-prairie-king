@@ -4,4 +4,4 @@
 # Exclude libraries and such from language stats
 include/* linguist-vendored
 engine-from-scratch/src/glad.c linguist-vendored
-engine-from-scratch/*.txt
+engine-from-scratch/*.txt linguist-vendored
